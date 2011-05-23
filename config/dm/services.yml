@@ -1,0 +1,9 @@
+parameters:
+  event_calendar.class: dmEventCalendar
+  event_calendar.options:               []
+
+services:
+  event_calendar:
+    class:                    %event_calendar.class%
+    shared:                   false
+    arguments:                [ @service_container, %event_calendar.options% ]

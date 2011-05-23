@@ -1,0 +1,6 @@
+dmWidgetSchedule:
+  eventCalendar:
+#    form_class:         myWidgetMenuForm
+#    view_class:         myWidgetMenuView
+#    cache: false
+#    public_name: Twitter search

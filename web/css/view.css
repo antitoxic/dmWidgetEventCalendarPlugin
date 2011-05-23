@@ -1,0 +1,28 @@
+ol.dm_calendar {
+	margin-left:-3px;
+	width:301px;
+}
+ol.dm_calendar li {
+	float:left;
+	text-align: center;
+	width:40px;
+	height:40px;
+	margin: 3px 0 0 3px;
+	text-shadow: 1px 1px 0px #222;
+/*	filter: dropshadow(color=#222, offx=1, offy=1); */
+}
+ol.dm_calendar li.week-day {
+	color:#fff;
+	background: #696969;
+	font: bold 24px/40px HelenBg, Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+}
+
+ol.dm_calendar li.day {
+	color:#fff;
+	background: #444;
+	font: 24px/40px HelenBg, Helvetica, Arial, sans-serif;
+}
+ol.dm_calendar li.day.next, ol.dm_calendar li.day.prev {
+	color:#828282;
+}

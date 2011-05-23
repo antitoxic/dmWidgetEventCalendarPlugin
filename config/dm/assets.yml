@@ -1,0 +1,8 @@
+js:
+  dmWidgetEventCalendarPlugin:
+    view: view
+    form: form
+css:
+  dmWidgetEventCalendarPlugin:
+    view: view
+    form: form
