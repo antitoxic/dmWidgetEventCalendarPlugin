@@ -1,23 +1,19 @@
 <?php
 
-//class dmEventCalendar extends dmConfigurable implements ArrayAccess, Countable, IteratorAggregate
 class dmEventCalendar extends dmHtmlCalendar
 {
-
-	protected
-	$serviceContainer;
 
 	protected static
 	$eventModels;
 
-	public function __construct( dmBaseServiceContainer $serviceContainer , $options = array( ), $date = null )
+	/**
+	 *
+	 * @param array $options Options for the calendar
+	 * @param int $date  Timestamp of a date from the Week/Month/Year you want to display
+	 */
+	public function __construct($options = array( ), $date = null )
 	{
-		$this->serviceContainer = $serviceContainer;
-		if (isset( $options['query'] ))
-		{
-			unset( $options['query'] );
-		}
-		parent::__construct( $options );
+		parent::__construct( $options, $date );
 	}
 
 	public static function getEventModels()
@@ -54,7 +50,6 @@ class dmEventCalendar extends dmHtmlCalendar
 
 	protected function attachModelEvents(Doctrine_Collection $events)
 	{
-//		var_dump($events->getFirst()->getScheduledOn());
 		foreach ($events as $event)
 		{
 			$this->addEvent( strtotime( $event->getCalendarDate() ) , $event );
