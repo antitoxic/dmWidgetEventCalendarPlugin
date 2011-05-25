@@ -5,10 +5,6 @@ class dmWidgetScheduleEventCalendarView extends dmWidgetPluginView
 
 	protected function filterViewVars( array $vars = array( ) )
 	{
-//  public function setParameter($name, $value)
-//  {
-//    $this->parameters[strtolower($name)] = $value;
-//  }
 		$serviceContainer = $this->context->getServiceContainer();
 		$defaultOptions = $serviceContainer->getParameter('event_calendar.options');
 		$newOptions = array();
