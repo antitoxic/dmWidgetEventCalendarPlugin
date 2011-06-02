@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * Fromat codes and info @ http://trac.symfony-project.org/wiki/formatDateHowTo
+ */
 class dmCalendarDateFormat extends sfDateFormat {
 
 //	public function getWday($date, $pattern = 'EE') {
@@ -29,7 +32,7 @@ class dmCalendarDateFormat extends sfDateFormat {
 	public function getFormatInfo() {
 		return $this->formatInfo;
 	}
-	
+
 	public function format($time, $pattern = 'F', $inputPattern = null, $charset = 'UTF-8') {
 		$charset = sfConfig::get('sf_charset');
 		return parent::format($time, $pattern, $inputPattern, $charset);
