@@ -431,6 +431,10 @@ class dmHtmlCalendar extends dmCalendarBase
 		return '.' . implode( '.' , $classes );
 	}
 
+	public function getCurrentDate() {
+		return $this->date;
+	}
+
 }
 
 function array_rotate( &$arr , $times=1 )
