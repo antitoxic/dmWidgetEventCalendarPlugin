@@ -42,7 +42,7 @@ foreach ($calendar->getDays() as $day)
 	{
 		if ($event instanceof dmHtmlCalendarEventInterface)
 		{
-			$dayTagOptions .= $calendar->parseClasses( $event->getAdditionalDayClasses() );
+			$dayTagOptions .= $calendar->parseClasses( $event->getAdditionalDayClasses($day) );
 			$dayContent .= $event->renderEvent( $day , $isFirstEvent );
 		} else
 		{
