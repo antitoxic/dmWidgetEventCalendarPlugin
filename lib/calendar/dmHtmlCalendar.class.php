@@ -428,6 +428,7 @@ class dmHtmlCalendar extends dmCalendarBase
 		{
 			return '';
 		}
+		$classes = array_unique($classes);
 		return '.' . implode( '.' , $classes );
 	}
 
