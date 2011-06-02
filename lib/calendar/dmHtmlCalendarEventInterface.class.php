@@ -4,9 +4,10 @@ interface dmHtmlCalendarEventInterface {
 
 	public function renderEvent($day, $isFirstEvent=true);
     /**
+	 * $param dmHtmlCalendarDay $day The day it's called for
      * @return array Classes that will be appended to day markup element
      */
-	public function getAdditionalDayClasses();
+	public function getAdditionalDayClasses($day);
     /**
      * @return array Attributes that will be appended to day markup element
      */
