@@ -66,9 +66,10 @@ class dmEventCalendar extends dmHtmlCalendar
 			throw new sfException( 'The provided model ('.$model.') for Diem Calendar should implement dmHtmlCalendarEventInterface' );
 		}
 		//get this month's events
-		$query = $model::getCalendarQuery($this->getFirstDateOfMonth(), $this->getLastDateOfMonth());
+
+		$query = call_user_func(array($model, 'getCalendarQuery'), $this->getFirstDateOfMonth(), $this->getLastDateOfMonth());
 		if (is_null( $query) || !$query instanceof Doctrine_Query) {
-			$date_column = $model::getCalendarDateColumnName();
+			$date_column = call_user_func(array($model, 'getCalendarDateColumnName'));
 			$query = dmDb::table( $model )
 				->createQuery( 'e' )
 				->andWhere( "DATEDIFF('" . date( 'Y-m-d' , $this->getFirstDateOfMonth() ) . "', e." . $date_column . ") < 0" )
