@@ -48,6 +48,8 @@ class dmHtmlCalendar extends dmCalendarBase
 		if (is_null( $date ))
 		{
 			$this->date = time();
+		} else {
+			$this->date = is_int($date) ? $date : strtotime($date);
 		}
 		$this->setOption( 'culture' , sfContext::getInstance()->getUser()->getCulture() );
 		$this->extendOptions( $options );
@@ -126,12 +128,38 @@ class dmHtmlCalendar extends dmCalendarBase
 
 	/**
 	 *
-	 * @param type dmHtmlCalendarDay Day to compare
+	 * @param dmHtmlCalendarDay|int Day to compare
 	 * @return boolean
 	 */
-	public function isCurrentDay( $calendarDay )
+	public function isCurrentDay( $calendarDay, $realTime=false  )
 	{
-		return date( 'Y-m-d' , $calendarDay->getDate() ) == date( 'Y-m-d' , $this->date );
+		$date = $calendarDay instanceof dmHtmlCalendarDay ? $calendarDay->getDate() : $calendarDay;
+		$currentDate =  $realTime ? time() : $this->date;
+		
+		return date( 'Y-m-d' , $date ) == date( 'Y-m-d' , $currentDate);
+	}
+
+	/**
+	 *
+	 * @param dmHtmlCalendarDay|int Day or timestamp to compare
+	 * @return boolean
+	 */
+	public function isInThePast( $calendarDay, $realTime=false )
+	{
+		$date = $calendarDay instanceof dmHtmlCalendarDay ? $calendarDay->getDate() : $calendarDay;
+		$currentDate =  $realTime ? time() : $this->date;
+		
+		return $date < $currentDate;
+	}
+
+	/**
+	 *
+	 * @param dmHtmlCalendarDay|int Day or timestamp to compare
+	 * @return boolean
+	 */
+	public function isDayInThePast( $calendarDay, $realTime=false )
+	{
+		return $this->isInThePast($calendarDay) && !$this->isCurrentDay( $calendarDay, $realTime );
 	}
 
 	/**
@@ -377,11 +405,11 @@ class dmHtmlCalendar extends dmCalendarBase
 	 */
 	protected function setWeekDayStart( $value )
 	{
-		if (!(in_array( $value , $this->weekDayMaping ) || in_array( $value , range(0, 6) )))
+		if (!(in_array( $value , $this->weekDayMaping ) || array_key_exists($value , $this->weekDayMaping)))
 		{
 			throw new sfException( 'dmCalendar: The option "weekDayStart" can only be one of the following: ' . implode( ', ' , $this->weekDayMaping ).' or '. implode( ', ' , range(0,6) ) );
 		}
-		$this->options['weekDayStart'] = in_array( $value , range(0, 6) ) ? $value : array_search($value , $this->weekDayMaping);
+		$this->options['weekDayStart'] = array_key_exists($value , $this->weekDayMaping) ? $value : array_search($value , $this->weekDayMaping);
 		return $this;
 	}
 

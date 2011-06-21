@@ -1,5 +1,4 @@
 <?php
-
 echo _tag( 'h2' , __( 'Events' ) );
 echo _open( 'ol.dm_calendar.clearfix' );
 if ($calendar->getOption( 'showWeekDays' ))
@@ -29,7 +28,11 @@ foreach ($calendar->getDays() as $day)
 {
 	$dayContent = '';
 	$dayTagOptions = '.day';
-	$dayTagOptions .= $calendar->isCurrentDay( $day ) ? '.current' : '';
+	if ($calendar->isDayInThePast($day, true)) {
+		$dayTagOptions .= '.past';
+	} else {
+		$dayTagOptions .= $calendar->isCurrentDay( $day ) ? '.current' : '';
+	}
 	$dayTagOptions .= $day->hasAnyEvents() ? '.events' : '';
 	$dayTagOptions .= $day->hasManyEvents() ? '.multi' : '';
 	$isFirstEvent = true;
