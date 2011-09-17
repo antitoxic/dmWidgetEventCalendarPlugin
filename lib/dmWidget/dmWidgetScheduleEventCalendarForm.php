@@ -6,10 +6,15 @@ class dmWidgetScheduleEventCalendarForm extends dmWidgetPluginForm
 	public function configure()
 	{
 		$choices = dmEventCalendar::getEventModels();
-		$choices = array_combine( $choices , $choices );
-		$choices = array_reverse($choices, true);
+		$hasEventModels = !empty($choices);
+		if ($hasEventModels) {
+			$choices = array_combine( $choices , $choices );
+			$choices = array_reverse($choices, true);
+		}
 		$choices[''] = '';
-		$choices = array_reverse($choices, true);
+		if ($hasEventModels) {
+			$choices = array_reverse($choices, true);
+		}
 		$this->setWidget( 'model' , new sfWidgetFormChoice( array(
 				'choices' => $choices
 				) ) );
